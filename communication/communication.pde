@@ -42,17 +42,15 @@ void serialEvent(Serial p) {
       println("Invalid JSON format: " + inMsg);
       return;
     }
-    
+
     // creat the OscMessage to send over UDP
     OscMessage message = new OscMessage(ENDPOINT);
-    message.add(jsonMsg.getInt("fsr1"));
-    message.add(jsonMsg.getInt("fsr2"));
+    message.add(jsonMsg.getInt("tapLeft"));
+    message.add(jsonMsg.getInt("tapRight"));
     message.add(jsonMsg.getInt("pc"));
     message.add(jsonMsg.getInt("cap"));
     osc.send(message, oscOut);
   } catch (RuntimeException e) {
     e.printStackTrace();
-  } finally {
-    delay(1000);
   }
 }
